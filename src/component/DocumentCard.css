@@ -1,0 +1,12 @@
+.documentCard_container:hover {
+  margin-top: -5px;
+  background-color: rgb(190, 190, 190);
+}
+.documentCard_container:hover .image_div img {
+  opacity: 0.5;
+  transition: all 0.5s;
+}
+.documentCard_container:hover .details_btn {
+  bottom: -230px;
+  transition: all 0.3s;
+}
