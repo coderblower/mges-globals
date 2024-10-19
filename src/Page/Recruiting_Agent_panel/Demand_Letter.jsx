@@ -125,14 +125,18 @@ const Agent_Demand_Letter = () => {
                       View
                     </Link>
                   </td>
-                  <td className="py-4 px-3 text-center">
-                    <button
-                      onClick={() => handleCreate(data.id)}
-                      className="py-2 px-4 bg-blue-500 text-white rounded-md"
-                      disabled={!!buttonStatus[data.id]} // Disable if already sent
+                  <td className="py-4 px-1 text-center w-[30%]">
+                  <Link
+                      to={`/agent_panel/demand_letter/assign_candidate/${data.id}`} // Fix extra closing parenthesis
+                      className="bg-[#1F2937] hover:underline"
                     >
-                      {buttonStatus[data.id] ? "Sent" : "Send"}
-                    </button>
+                        <button
+                        
+                        className="py-2 px-4 bg-[#1F2937] text-white rounded-md" >
+                         Assign Candidate 
+                      </button>
+                    </Link>
+                    
                   </td>
                 </tr>
               ))}

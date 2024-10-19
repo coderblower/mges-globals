@@ -3,6 +3,7 @@ import Navber from "../component/Navber";
 import ProfileMenu from "../component/ProfileMenu/ProfileMenu";
 import menu_icon from "../../public/images/menu_1.svg";
 import { useState } from "react";
+import NotificationBell from "../component/Notification";
 
 const Agent_panel = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -61,6 +62,7 @@ const Agent_panel = () => {
       {/* Main contant */}
       <div className=" lg:ml-[300px] w-full lg:px-[80px] pb-[50px] overflow-hidden">
         <div className="flex items-center justify-between lg:justify-end lg:mt-10">
+          <NotificationBell />
           <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden">
             <img src={menu_icon} alt="" />
           </button>
