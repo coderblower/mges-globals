@@ -18,7 +18,9 @@ const Agent_Demand_Letter_View = () => {
     setError(null); // Reset any previous error
     try {
       const res = await get(`/api/demand_letter/${id}`); // Adjust API endpoint
-      setDemandLetter(res);
+      
+      setDemandLetter(res[0].pre_demand_letter   );
+      console.log(res)
     } catch (error) {
       console.error("Error fetching demand letter:", error);
       setError("Failed to fetch demand letter. Please try again later.");

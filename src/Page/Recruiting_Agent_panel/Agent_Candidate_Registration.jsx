@@ -209,6 +209,7 @@ const Agent_Candidate_Registration = () => {
 
     setLoading(true);
     try {
+      console.log(payload)
       const res = await post("api/user/create", payload, {
         headers: {
           "Content-Type": "multipart/form-data",

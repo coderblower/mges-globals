@@ -23,11 +23,13 @@ const Agent_Demand_Letter = () => {
     setError(null); // Reset any previous error
 
     try {
-      console.log(id);
+      
       const res = await get(`api/agent/get_demand_letters/${id}`);
 
-      const demandLetters = res[0]?.demand_letter_issues || []; // Fallback to an empty array
-      setDemandLetters(demandLetters);
+      console.log(res)
+       // Fallback to an empty array
+       
+      setDemandLetters(res);
 
       // Update pagination
       setPagination({
@@ -88,7 +90,7 @@ const Agent_Demand_Letter = () => {
   return (
     <div className="lg:mt-10 mt-2">
       <div className="flex items-center justify-center mt-[24px]">
-        <h2 className="text-[24px] text-[#4D4D4D] text-center mb-5 font-bold">Demand Letter</h2>
+        <h2 className="text-[24px] text-[#4D4D4D] text-center mb-5 font-bold">Demand Letters</h2>
       </div>
 
       <div className="bg-white shadow-lg mt-8 rounded-md lg:px-[46px] px-[10px] py-[27px]">
@@ -102,7 +104,9 @@ const Agent_Demand_Letter = () => {
                 <th className="py-4 px-3 font-semibold">SL.</th>
                 <th className="py-4 px-3 font-semibold">Description</th>
                 <th className="py-4 px-3 font-semibold">Postions </th>
-                <th className="py-4 px-3 font-semibold">View</th>
+                <th className="py-4 px-3 font-semibold">View </th>
+                <th className="py-4 px-3 font-semibold">Candidates </th> 
+
                 <th className="py-4 px-3 font-semibold text-center">Actions</th>
               </tr>
             </thead>
@@ -117,6 +121,7 @@ const Agent_Demand_Letter = () => {
                   
                   <td className="py-4 px-3">{data?.pre_demand_letter?.description || "N/A"}</td>
                   <td className="py-4 px-3">{ JSON.stringify(data?.pre_demand_letter?.positions)}</td>
+                  
                   <td className="py-4 px-3">
                     <Link
                       to={`/agent_panel/demand_letter/${data.id}`} // Fix extra closing parenthesis
@@ -125,6 +130,10 @@ const Agent_Demand_Letter = () => {
                       View
                     </Link>
                   </td>
+                  <td className="py-4 px-3"> <Link
+                      to={`/agent_panel/demand_letter/selected_candidate/${data.id}`} // Fix extra closing parenthesis
+                      className=" hover:underline"
+                    > selected Candidate </Link></td> 
                   <td className="py-4 px-1 text-center w-[30%]">
                   <Link
                       to={`/agent_panel/demand_letter/assign_candidate/${data.id}`} // Fix extra closing parenthesis

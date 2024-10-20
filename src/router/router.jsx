@@ -107,6 +107,7 @@ import Agent_Demand_Letter_View from "../Page/Recruiting_Agent_panel/Demand_Lett
 import Assign_letter from "../Page/Admin_panel/assign_letter";
 import AgentChecklist from "../Page/Admin_panel/assign_letter";
 import AssignCandidate from "../Page/Recruiting_Agent_panel/AssignCandidate";
+import View_selected_candidate from "../Page/Recruiting_Agent_panel/View_selected_candidate";
 
 const router = createBrowserRouter([
   {
@@ -564,6 +565,13 @@ const router = createBrowserRouter([
         path: "demand_letter/assign_candidate/:id",
         element: <AssignCandidate />,
       },
+      {
+        path: "demand_letter/selected_candidate/:id",
+        element: <View_selected_candidate />,
+      },
+
+      
+
 
       {
         path: "pre_demand",
