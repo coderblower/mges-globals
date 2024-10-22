@@ -20,7 +20,7 @@ const Agreed_Pre_Demand_Letter_Single = () => {
   });
   const [selectedRows, setSelectedRows] = useState([]);
   const [preDemandLetter, setPreDemandLetter] = useState(null); // New state for pre-demand letter data
-  const [quantityData, setQuantityData] = useState({});// State for quantities keyed by letter.id
+  const [quantityData, setQuantityData] = useState([]);
 
   useEffect(() => {
     fetchPreDemandLetterData(); // Fetch pre-demand letter data
@@ -30,14 +30,14 @@ const Agreed_Pre_Demand_Letter_Single = () => {
     if (allLetters) {
       const transformedData = allLetters?.map((letter) => ({
         id: letter.id,
-        "Company Name": letter.company_name,
-        "License No": letter.license_no,
-        "Submission Date": letter.updated_at.slice(0, 10),
+        "Company Name": letter.company_name || 'N/A',
+        "License No": letter.license_no || 'N/A',
+        "Submission Date": letter.updated_at ? letter.updated_at.slice(0, 10) : 'N/A',
         Status: letter.status || "Pending",
       }));
       setCsvData(transformedData);
     }
-  }, [letters]);
+  }, [allLetters]);
 
   const fetchPreDemandLetterData = async () => {
     setLoading(true);
@@ -47,8 +47,8 @@ const Agreed_Pre_Demand_Letter_Single = () => {
         setPreDemandLetter(res.pre_demand_letter); // Set the pre-demand letter data
         setLetters(res.users); // Set users
         setPagination({
-          per_page: res.per_page,
-          total: res.total,
+          per_page: res.per_page || 10,
+          total: res.total || 0,
         });
       }
     } catch (error) {
@@ -99,26 +99,51 @@ const Agreed_Pre_Demand_Letter_Single = () => {
   };
 
   const handleQuantityChange = (letterId, category, value) => {
-    setQuantityData(prev => ({
-      ...prev,
-      [letterId]: {
-        ...prev[letterId], // Preserve previous categories for this letter
-        [category]: value, // Set the quantity for this specific category
-      },
-    }));
+    setQuantityData((prev) => {
+      // Find if the letterId already exists in the state
+      const existingLetterIndex = prev.findIndex((item) => item.id === letterId);
 
+      if (existingLetterIndex !== -1) {
+        // Letter already exists, update the positions array
+        const updatedPositions = prev[existingLetterIndex].positions.map((position) => {
+          if (position.des === category) {
+            return { ...position, qty: value }; // Update quantity for the category
+          }
+          return position;
+        });
+
+        const updatedData = [...prev];
+        updatedData[existingLetterIndex] = {
+          id: letterId,
+          positions: updatedPositions,
+        };
+
+        return updatedData; // Return updated array
+      } else {
+        // Letter doesn't exist, add new entry
+        return [
+          ...prev,
+          {
+            id: letterId,
+            positions: [{ des: category, qty: value }],
+          },
+        ];
+      }
+    });
     console.log(quantityData)
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
-    const payload = Object.keys(quantityData).map(letterId => ({
-      id: letterId,
-      qty: quantityData[letterId],
-    }));
+
+    const payload = quantityData;
     
-    console.log(payload); // Prepare for sending payload to server
-    // Use post to submit payload to your server
-    // await post('/api/submit-endpoint', payload);
+    try {
+      const res = await post(`/api/pre_demand_letter/admin_approve_agent_agreed_pre_demand/${id}`, payload);
+      console.log(payload); // Log payload
+    } catch (error) {
+      console.error("Error submitting the data:", error);
+    }
   };
 
   return (
@@ -142,35 +167,35 @@ const Agreed_Pre_Demand_Letter_Single = () => {
 
       {/* Show Pre Demand Letter Data */}
       {preDemandLetter && (
-      <div className="mt-4 p-4 bg-gray-200">
-        <p><strong>Description:</strong> {preDemandLetter.description}</p>
-        <p><strong>Status:</strong> {preDemandLetter.status}</p>
-        <p><strong>Created At:</strong> {new Date(preDemandLetter.created_at).toLocaleDateString()}</p>
-    
-        {/* Display positions */}
-        <h4 className="font-bold mt-2">Positions:</h4>
-        <ul className="list-disc pl-5">
-          {preDemandLetter.positions?.map((position, index) => (
-            <p key={index}>
-              <span className="font-bold">Category:</span> {position.category} - <br />
-              <span className="font-bold">Quantity:</span> {position.qty}, <br />
-              <span className="font-bold">Salary:</span> ${position.salary}
-            </p>
-          ))}
-        </ul>
-    
-        {/* Display terms and conditions */}
-        <h4 className="font-bold mt-2">Terms and Conditions:</h4>
-        <div dangerouslySetInnerHTML={{ __html: preDemandLetter.terms_conditions }} />
-      </div>
+        <div className="mt-4 p-4 bg-gray-200">
+          <p><strong>Description:</strong> {preDemandLetter.description}</p>
+          <p><strong>Status:</strong> {preDemandLetter.status}</p>
+          <p><strong>Created At:</strong> {new Date(preDemandLetter.created_at).toLocaleDateString()}</p>
+
+          {/* Display positions */}
+          <h4 className="font-bold mt-2">Positions:</h4>
+          <ul className="list-disc pl-5">
+            {preDemandLetter.positions?.map((position, index) => (
+              <p key={index}>
+                <span className="font-bold">Category:</span> {position.category} - <br />
+                <span className="font-bold">Quantity:</span> {position.qty}, <br />
+                <span className="font-bold">Salary:</span> ${position.salary}
+              </p>
+            ))}
+          </ul>
+
+          {/* Display terms and conditions */}
+          <h4 className="font-bold mt-2">Terms and Conditions:</h4>
+          <div dangerouslySetInnerHTML={{ __html: preDemandLetter.terms_conditions }} />
+        </div>
       )}
       
       <div>
         <h2 className="font-bold text-[24px] mt-[30px]">
-          Select Agent and send To Agency  
+          Select Agent and send To Agency
         </h2>
       </div>
-      
+
       {/* Form for submitting quantities */}
       <form onSubmit={handleSubmit}>
         {/* Table */}
@@ -213,12 +238,12 @@ const Agreed_Pre_Demand_Letter_Single = () => {
                                 <span className="mr-4">{position.category}</span>
                                 <input
                                   type="number"
-                                  defaultValue={position.qty} // Default value for quantity input
-                                  onChange={(e) => handleQuantityChange(letter.id, position.category, e.target.value)} // Update quantity for this category
-                                  className="w-1/4 p-2 border border-gray-300 rounded-md mr-4"
-                                  placeholder="Enter number of positions"
+                                  defaultValue={position.qty} // You can set an initial value here
+                                  onChange={(e) =>
+                                    handleQuantityChange(letter.id, position.category, e.target.value)
+                                  }
+                                  className="input input-bordered w-24"
                                 />
-                                <span>Salary: ${position.salary}</span>
                               </div>
                             ))}
                           </div>
@@ -227,34 +252,35 @@ const Agreed_Pre_Demand_Letter_Single = () => {
                     )}
                   </React.Fragment>
                 ))}
+
+              {/* Loading */}
+              {loading && <TableLoading tr_number={4} td_number={4} />}
             </tbody>
           </table>
-
-          {loading && (
-            <div className="flex justify-center min-w-full mt-20">
-              <TableLoading />
-            </div>
-          )}
-          {!loading && letters?.length === 0 && (
-            <div className="flex justify-center min-w-full mt-20">
-              <h4 className="text-black font-bold text-xl">No Data found!</h4>
-            </div>
-          )}
-        </div>
-
-        {/* Submit Button */}
-        <div className="mt-4 flex justify-end">
-          <button type="submit" className="btn btn-primary">Submit</button>
         </div>
 
         {/* Pagination */}
-        {!loading && letters?.length > 0 && pagination?.total > pagination?.per_page && (
+        <div className="flex justify-end mt-6">
           <Pagination
-            paginations={pagination}
             currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
+            perPage={pagination?.per_page}
+            total={pagination?.total}
+            onPageChange={(page) => {
+              setCurrentPage(page);
+              handleCSVData(); // Fetch CSV data on page change
+            }}
           />
-        )}
+        </div>
+
+        {/* Submit Button */}
+        <div className="text-end mt-[40px]">
+          <button
+            className="btn bg-[#071e55] w-[200px] text-white"
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );
