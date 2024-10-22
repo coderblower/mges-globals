@@ -29,6 +29,10 @@ const Admin_Dashboard = () => {
       name: "Pre Demand Letter",
     },
     {
+      path: "/admin/agreed_pre_demand_letter",
+      name: "Agreed Pre Demand ",
+    },
+    {
       path: "/admin/demand_letter",
       name: "Demand Letter",
     },

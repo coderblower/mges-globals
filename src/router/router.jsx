@@ -108,6 +108,8 @@ import Assign_letter from "../Page/Admin_panel/assign_letter";
 import AgentChecklist from "../Page/Admin_panel/assign_letter";
 import AssignCandidate from "../Page/Recruiting_Agent_panel/AssignCandidate";
 import View_selected_candidate from "../Page/Recruiting_Agent_panel/View_selected_candidate";
+import Agreed_Pre_Demand_Letter from "../Page/Admin_panel/Agreed_Pre_Demand_Letter";
+import Agreed_Pre_Demand_Letter_Single from "../Page/Admin_panel/Agreed_Pre_Demand_Letter_Single";
 
 const router = createBrowserRouter([
   {
@@ -279,6 +281,7 @@ const router = createBrowserRouter([
         path: "document_view/:id",
         element: <DocumentView />,
       },
+      
       {
         path: "user_profile/:id",
         element: <Profile_Details />,
@@ -306,6 +309,14 @@ const router = createBrowserRouter([
       {
         path: "pre_demand_letter",
         element: <Admin_Pre_Demand_Letter />,
+      },
+      {
+        path: "agreed_pre_demand_letter",
+        element: <Agreed_Pre_Demand_Letter />,
+      },
+      {
+        path: "agreed_pre_demand_letter/:id",
+        element: <Agreed_Pre_Demand_Letter_Single />,
       },
       {
         path: "pre_demand_letter/:id",
