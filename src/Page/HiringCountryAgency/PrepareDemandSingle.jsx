@@ -3,6 +3,13 @@ import { get, post } from "../../api/axios";
 import TableLoading from "../../component/TableLoading";
 import { useParams, Link } from "react-router-dom";
 import Pagination from "../../component/Pagination";
+import Modal from "../../component/Modal"; // Import your Modal component
+import Demand_Letter_View from "./Demand_Letter_View";
+
+import documentUploadet from "../../../public/images/document.svg";
+import documentNotUploadet from "../../../public/images/documentNot.svg";
+import edit_icon from "../../assets/update.svg";
+import veiw_icon from "../../../public/images/veiw_ison.svg";
 
 const PrepareDemandSingle = () => {
   const { id } = useParams(); // Get the ID from the URL parameters
@@ -16,6 +23,8 @@ const PrepareDemandSingle = () => {
     total: "",
   });
   const [buttonStatus, setButtonStatus] = useState({}); // New state to track button status
+  const [modals, setModals] = useState(false); // State for modal visibility
+  const [selectedPositions, setSelectedPositions] = useState([]); // State to hold positions data
 
   // Fetch demand letters from the API
   const fetchDemandLetters = async () => {
@@ -23,12 +32,9 @@ const PrepareDemandSingle = () => {
     setError(null); // Reset any previous error
     try {
       const res = await get(`api/pre_demand_letter/agreed_pdl_to_agency_single/${id}`);
-
-      // Set demand letters and users only if the response contains users
       setDemandLetters(res);
       setUsers(res.users || []);  // Ensure `users` is set to an empty array if it's undefined
 
-      // Update pagination
       setPagination({
         per_page: res.per_page || 10,  // Use default values if `per_page` is missing
         total: res.total || 0,
@@ -47,23 +53,16 @@ const PrepareDemandSingle = () => {
     setError(null); // Reset any previous error
     try {
       const res = await get(`api/pre_demand_letter/show_demand_letter/${id}`);
-
-      // Set demand letters and users only if the response contains users
-      
-      
-      //res accept array which hase 'user_id'
-      res.forEach(data=>{
+      res.forEach(data => {
         setButtonStatus(prevStatus => ({ ...prevStatus, [data.user_id]: true })); 
-      })
-
-      
+      });
     } catch (error) {
       console.error("Error fetching demand letters:", error);
-      
     } finally {
       setLoading(false);
     }
   };
+
   // Use effect to fetch data when the component is mounted
   useEffect(() => {
     fetchDemandLetters();
@@ -88,19 +87,20 @@ const PrepareDemandSingle = () => {
     setError(null); // Reset any previous error
     try {
       const res = await post(`api/pre_demand_letter/demand_single/${parseInt(id, 10)}/${parseInt(preId, 10)}`);
-
-      // Mark this user as "sent" in button status
       setButtonStatus(prevStatus => ({ ...prevStatus, [id]: true }));
-      
-      // Set demand letters and users only if the response contains users
       setSend(true);
-
     } catch (error) {
       console.error("Error fetching demand letters:", error);
       setError("Failed to fetch demand letters. Please try again later.");
     } finally {
       setLoading(false);
     }
+  };
+
+  // Handle opening the modal with position data
+  const handleViewPositions = (positions) => {
+    setSelectedPositions(positions);
+    setModals(true);
   };
 
   return (
@@ -156,24 +156,32 @@ const PrepareDemandSingle = () => {
                   className={`${index % 2 === 0 ? "bg-white" : "bg-[#f9f9f9]"
                     } hover:bg-[#f1f1f1]`}
                 >
-                  <td className="py-4 px-3">{index+1}</td>
+                  <td className="py-4 px-3">{index + 1}</td>
                   <td className="py-4 px-3">{user.name || "N/A"}</td>
                   <td className="py-4 px-3">
                     <Link
                       to={`/hiring_country_recruting_agency/demand_letters/${user.id}`}
                       className="text-blue-600 hover:underline"
                     >
-                      View
+                      <img src={documentUploadet} alt="" /> 
                     </Link>
                   </td>
                   <td className="py-4 px-3 text-center">
+                     {/* Eye Button to view positions */}
+                     <button
+                      onClick={() => handleViewPositions(user.positions || [])}
+                      className="ml-2 text-blue-500 hover:underline"
+                    >
+                     <img src={veiw_icon} alt="" />
+                    </button>
                     <button
                       onClick={() => handleCreate(user.id, demandLetters.id)}
-                      className={`py-3 px-6 ${buttonStatus[user.id]? "bg-[#ffffff]  text-black": "bg-[#1E3767] text-white"}   font-bold rounded-md`}
+                      className={`py-3 px-6 ${buttonStatus[user.id] ? "bg-[#ffffff]  text-black" : "bg-[#1E3767] text-white"}   font-bold rounded-md`}
                       disabled={!!buttonStatus[user.id]} // Disable if the button has been clicked
                     >
                       {buttonStatus[user.id] ? "Done" : "Send"} {/* Change button text */}
                     </button>
+                   
                   </td>
                 </tr>
               ))}
@@ -186,9 +194,35 @@ const PrepareDemandSingle = () => {
         )}
       </div>
 
+      {/* Modal to display positions data */}
+      <Modal modals={modals} setModals={setModals}>
+        <div className=" py-10">
+        <h2 className="text-lg font-bold"> Requirement</h2>
+        
+  <table className="min-w-full border-collapse border border-gray-200 mt-4">
+    <thead>
+      <tr className="bg-gray-100">
+        <th className="border border-gray-300 px-4 py-2">Description</th>
+        <th className="border border-gray-300 px-4 py-2">Quantity</th>
+        <th className="border border-gray-300 px-4 py-2">Salary</th> {/* New Salary column */}
+      </tr>
+    </thead>
+    <tbody>
+      {selectedPositions.map((pos, index) => (
+        <tr key={index} className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+          <td className="border border-gray-300 px-4 py-2">{pos.des}</td>
+          <td className="border border-gray-300 px-4 py-2">{pos.qty}</td>
+          <td className="border border-gray-300 px-4 py-2">{pos.salary}</td> {/* Salary data */}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+        </div>
+      </Modal>
+
       <div className="flex items-center justify-center mt-[24px]"></div>
     </div>
   );
 };
 
-export default PrepareDemandSingle;
+export default PrepareDemandSingle

@@ -97,19 +97,18 @@ const Demand_Letter = () => {
             <table className="w-full text-left">
             <thead>
               <tr className="bg-[#F5F5F5] text-[#333]">
-                <th className="py-4 px-3 font-semibold">ID</th>
+                <th className="py-4 px-3 font-semibold">Sl.</th>
                 <th className="py-4 px-3 font-semibold">Description</th>
                 {/* <th className="py-4 px-3 font-semibold">Category</th>
                 <th className="py-4 px-3 font-semibold">Qty</th>
                 <th className="py-4 px-3 font-semibold">Salary</th> */}
                 
-                <th className="py-4 px-3 font-semibold text-center">Total Agencies Applied </th>
+                <th className="py-4 px-3 font-semibold text-center">Total Agencies Recomended </th>
                 <th className="py-4 px-3 font-semibold text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
               {demandLetters.map((letter, index) => {
-                console.log( letter, 's');
                 return (
 
                 
@@ -119,7 +118,7 @@ const Demand_Letter = () => {
                   className={`${index % 2 === 0 ? "bg-white" : "bg-[#f9f9f9]"
                     } hover:bg-[#f1f1f1]`}
                 >
-                  <td className="py-4 px-3">{letter.id}</td>
+                  <td className="py-4 px-3">{index+1}</td>
                   <td className="py-4 px-3">{letter.description}</td> 
                   {/* {letter.positions.map((position, i) => (
                           <>

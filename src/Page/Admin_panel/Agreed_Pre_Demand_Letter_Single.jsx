@@ -87,16 +87,19 @@ const Agreed_Pre_Demand_Letter_Single = () => {
   };
 
   const handleCheckboxChange = (letterId) => {
-    // Toggle row expansion when checkbox is selected or deselected
     if (selectedRows.includes(letterId)) {
+      // If it's already selected, deselect it
       setSelectedRows(selectedRows.filter((id) => id !== letterId));
-      const newQuantityData = { ...quantityData };
-      delete newQuantityData[letterId]; // Remove the entry for this letter if unchecked
-      setQuantityData(newQuantityData);
+      
+      // Remove the corresponding object from quantityData
+      setQuantityData((prev) => prev.filter((data) => data.id !== letterId));
     } else {
+      // If not selected, select it
       setSelectedRows([...selectedRows, letterId]);
     }
+    console.log(quantityData);
   };
+  
 
 
   const handleSave = (letterId) => {
@@ -108,6 +111,7 @@ const Agreed_Pre_Demand_Letter_Single = () => {
   
 
   const handleQuantityChange = (letterId, category, value) => {
+    console.log(quantityData)
     setQuantityData((prev) => {
       // Ensure prev is an array
       const data = Array.isArray(prev) ? prev : [];
@@ -187,6 +191,7 @@ const Agreed_Pre_Demand_Letter_Single = () => {
         return updatedData.filter((letter) => letter.positions.length > 0);
       }
     });
+    console.log(quantityData)
   };
   
   
@@ -197,7 +202,7 @@ const Agreed_Pre_Demand_Letter_Single = () => {
     
     try {
       const res = await post(`/api/pre_demand_letter/admin_approve_agent_agreed_pre_demand/${id}`, payload);
-      console.log(payload); // Log payload
+      console.log(res); // Log payload
     } catch (error) {
       console.error("Error submitting the data:", error);
     }
@@ -276,12 +281,15 @@ const Agreed_Pre_Demand_Letter_Single = () => {
                       <td>{letter.partner?.full_name || letter.name}</td>
                       <td>{letter.partner?.license_no || "N/A"}</td>
                       <td className="text-center">
-                        <input
-                          type="checkbox"
-                          checked={selectedRows.includes(letter.id)}
-                          onChange={() => handleCheckboxChange(letter.id)}
-                        />
-                      </td>
+  <input
+    type="checkbox"
+    checked={
+      selectedRows.includes(letter.id) || (Array.isArray(quantityData) && quantityData.some(data => data.id === letter.id))
+    }
+    onChange={() => handleCheckboxChange(letter.id)}
+  />
+</td>
+
 
                     </tr>
 
@@ -290,45 +298,58 @@ const Agreed_Pre_Demand_Letter_Single = () => {
   <tr>
     <td colSpan="4">
       <div className="p-4 bg-gray-100">
-        {preDemandLetter.positions?.map((position, index) => (
-          <div key={index} className="flex items-center mb-2">
-            <input
-              type="checkbox"
-              className="mr-2"
-              checked={Array.isArray(quantityData) && quantityData.some(
-                (data) =>
-                  data.id === letter.id &&
-                  data.positions.some((pos) => pos.des === position.category)
-              )}
-              onChange={(e) => {
-                const isChecked = e.target.checked;
-                handleCheckboxForPosition(letter.id, position.category, isChecked);
-              }}
-            />
-            <span className="mr-4">Category: {position.category}</span>
-            <input
-              type="number"
-              disabled={
-                !(Array.isArray(quantityData) && quantityData.some(
-                  (data) =>
-                    data.id === letter.id &&
-                    data.positions.some((pos) => pos.des === position.category)
-                ))
-              }
-              defaultValue={position.qty}
-              onChange={(e) =>
-                handleQuantityChange(letter.id, position.category, e.target.value)
-              }
-              className="input input-bordered w-24"
-            />
-          </div>
-        ))}
+      {preDemandLetter.positions?.map((position, index) => (
+  <div key={index} className="flex items-center mb-2">
+    <input
+      type="checkbox"
+      className="mr-2"
+      checked={Array.isArray(quantityData) && quantityData.some(
+        (data) =>
+          data.id === letter.id &&
+          data.positions.some((pos) => pos.des === position.category)
+      )}
+      onChange={(e) => {
+        const isChecked = e.target.checked;
+
+        // Call handleCheckboxForPosition to handle the checkbox state
+        handleCheckboxForPosition(letter.id, position.category, isChecked);
+
+        // If checked, set the initial quantity to position.qty
+        if (isChecked) {
+          handleQuantityChange(letter.id, position.category, position.qty); // Set initial value to position.qty
+        } else {
+          // If unchecked, you can choose to set the quantity to 0 or remove it
+          handleQuantityChange(letter.id, position.category, 0); // Set to 0 when unchecked if needed
+        }
+      }}
+    />
+    <span className="mr-4">Category: {position.category}</span>
+    <input
+      type="number"
+      disabled={
+        !(Array.isArray(quantityData) && quantityData.some(
+          (data) =>
+            data.id === letter.id &&
+            data.positions.some((pos) => pos.des === position.category)
+        ))
+      }
+      defaultValue={position.qty}
+      onChange={(e) =>
+        handleQuantityChange(letter.id, position.category, e.target.value)
+      }
+      className="input input-bordered w-24"
+    />
+  </div>
+))}
+
 
         {/* Save Button */}
         <div className="mt-4">
           <button
             className="btn bg-[#071e55] text-white"
-            onClick={() => handleSave(letter.id)} // Call handleSave on click
+            onClick={() => {handleSave(letter.id)
+              
+            }} // Call handleSave on click
           >
             Save
           </button>

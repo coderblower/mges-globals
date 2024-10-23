@@ -13,6 +13,9 @@ import CSVBtn from "../../component/CSVBtn";
 import success_icon from "../../../public/images/success.svg";
 import documentUploadet from "../../../public/images/document.svg";
 import documentNotUploadet from "../../../public/images/documentNot.svg";
+import checkedImg from "../../../public/images/success_2.svg";
+
+
 
 const API_URL = import.meta.env.VITE_BASE_URL;
 
@@ -22,6 +25,9 @@ const View_selected_candidate = () => {
   const [search, setSearch] = useState("");
   const [countryFilter, setCountryFilter] = useState("");
   const { id } = useParams();
+  const [sendSuccess, setSendSuccess] = useState(false);
+
+
 
   const [pagination, setPagination] = useState({
     per_page: 10,
@@ -32,8 +38,30 @@ const View_selected_candidate = () => {
 
   useEffect(() => {
     fetchCandidates();
+    showSendButton();
   }, [currentPage, search, countryFilter]);
 
+  const showSendButton = async () => {
+    setLoading(true);
+
+   try {
+      let canArr = candidate.reduce((acc, val)=>( [...acc, val.id]), [])
+      
+      const response = await post('api/contract_letter/already_send_varify', {
+        primary_candidates: canArr, // Your candidate list
+        demand_letter_id: id, // Pass user_id as needed
+         // Any filter you are applying
+        
+      });
+      
+      setSendSuccess(response);
+
+    } catch (error) {
+      console.error("Error sending data:", error);
+    }
+
+
+  };
   const fetchCandidates = async () => {
     setLoading(true);
     try {
@@ -69,6 +97,28 @@ const View_selected_candidate = () => {
     }));
   };
 
+  const handleSend = async () => {
+    try {
+      let canArr = candidate.reduce((acc, val)=>( [...acc, val.id]), [])
+      
+      const response = await post('api/contract_letter/contract', {
+        primary_candidates: canArr, // Your candidate list
+        demand_letter_id: id, // Pass user_id as needed
+         // Any filter you are applying
+        
+      });
+      setSendSuccess(1);
+
+      
+      
+      if (response.status === 200) {
+        console.log("Successfully sent the data");
+      }
+    } catch (error) {
+      console.error("Error sending data:", error);
+    }
+  };
+  
   const handleCountrySearch = (e) => {
     setCountryFilter(e.target.value);
   };
@@ -97,6 +147,26 @@ const View_selected_candidate = () => {
             search={search}
             setSearch={setSearch}
           />
+
+        {!sendSuccess&& ( <button
+    type="button"
+    onClick={handleSend}  // Attach handler here
+    className="bg-[#071e55] text-white px-6 py-2 rounded-lg shadow-md hover:bg-[#0a295b] transition duration-300"
+  >
+    Send
+  </button>)}
+
+  {sendSuccess && (
+  <button
+    type="button"
+    // Attach handler here
+    className="flex items-center bg-[#071e55] text-white px-6 py-2 rounded-lg shadow-md hover:bg-[#0a295b] transition duration-300"
+  >
+    <span className="mr-2">done</span> {/* Adds margin to the right of the text */}
+    <img src={checkedImg} alt="" style={{ width: '20px', height: '20px' }} />
+  </button>
+)}
+
 
           {csvData?.length > 0 && (
             <CSVBtn data={csvData} filename={"Candidates_List"} />
