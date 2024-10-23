@@ -100,18 +100,11 @@ const Agreed_Pre_Demand_Letter_Single = () => {
 
 
   const handleSave = (letterId) => {
-    // Data in quantityData is already stored, just collapse the row
-    setSelectedRows((prevSelectedRows) => {
-      // Keep the parent row checked but collapse the child row (remove it from expanded state)
-      const updatedRows = prevSelectedRows.filter((id) => id !== letterId);
+    // Remove the row from selectedRows to collapse it
+    setSelectedRows((prevSelectedRows) => prevSelectedRows.filter((id) => id !== letterId));
   
-      // Re-add the letterId to keep the parent row checkbox checked
-      return [...updatedRows, letterId];
-    });
-  
-    // Additional logic for handling the saved data can go here (if needed)
+    // Data in quantityData remains unchanged
   };
-  
   
 
   const handleQuantityChange = (letterId, category, value) => {
@@ -293,7 +286,7 @@ const Agreed_Pre_Demand_Letter_Single = () => {
                     </tr>
 
                     {/* Conditionally render expanded row with extra inputs if checkbox is selected */}
-                    {selectedRows.includes(letter.id) && (
+                  {selectedRows.includes(letter.id) && (
   <tr>
     <td colSpan="4">
       <div className="p-4 bg-gray-100">
