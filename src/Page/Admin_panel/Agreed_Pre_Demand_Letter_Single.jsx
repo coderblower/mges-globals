@@ -98,31 +98,49 @@ const Agreed_Pre_Demand_Letter_Single = () => {
     }
   };
 
+
+  const handleSave = (letterId) => {
+    // Data in quantityData is already stored, just collapse the row
+    setSelectedRows((prevSelectedRows) => {
+      // Keep the parent row checked but collapse the child row (remove it from expanded state)
+      const updatedRows = prevSelectedRows.filter((id) => id !== letterId);
+  
+      // Re-add the letterId to keep the parent row checkbox checked
+      return [...updatedRows, letterId];
+    });
+  
+    // Additional logic for handling the saved data can go here (if needed)
+  };
+  
+  
+
   const handleQuantityChange = (letterId, category, value) => {
     setQuantityData((prev) => {
-      // Find if the letterId already exists in the state
-      const existingLetterIndex = prev.findIndex((item) => item.id === letterId);
-
+      // Ensure prev is an array
+      const data = Array.isArray(prev) ? prev : [];
+  
+      const existingLetterIndex = data.findIndex((item) => item.id === letterId);
+  
       if (existingLetterIndex !== -1) {
-        // Letter already exists, update the positions array
-        const updatedPositions = prev[existingLetterIndex].positions.map((position) => {
+        // Letter exists, update the positions array
+        const updatedPositions = data[existingLetterIndex].positions.map((position) => {
           if (position.des === category) {
             return { ...position, qty: value }; // Update quantity for the category
           }
           return position;
         });
-
-        const updatedData = [...prev];
+  
+        const updatedData = [...data];
         updatedData[existingLetterIndex] = {
           id: letterId,
           positions: updatedPositions,
         };
-
+  
         return updatedData; // Return updated array
       } else {
         // Letter doesn't exist, add new entry
         return [
-          ...prev,
+          ...data,
           {
             id: letterId,
             positions: [{ des: category, qty: value }],
@@ -130,9 +148,55 @@ const Agreed_Pre_Demand_Letter_Single = () => {
         ];
       }
     });
-    console.log(quantityData)
   };
-
+  
+  const handleCheckboxForPosition = (letterId, category, isChecked) => {
+    setQuantityData((prev) => {
+      // Ensure prev is an array
+      const data = Array.isArray(prev) ? prev : [];
+  
+      if (isChecked) {
+        const existingLetterIndex = data.findIndex((item) => item.id === letterId);
+  
+        if (existingLetterIndex !== -1) {
+          // Letter exists, add the new position
+          const updatedPositions = [
+            ...data[existingLetterIndex].positions,
+            { des: category, qty: 0 }, // Initial quantity is 0
+          ];
+  
+          const updatedData = [...data];
+          updatedData[existingLetterIndex] = {
+            ...data[existingLetterIndex],
+            positions: updatedPositions,
+          };
+  
+          return updatedData;
+        } else {
+          // If letter doesn't exist, add new entry
+          return [
+            ...data,
+            { id: letterId, positions: [{ des: category, qty: 0 }] },
+          ];
+        }
+      } else {
+        // If unchecked, remove the position
+        const updatedData = data.map((letter) => {
+          if (letter.id === letterId) {
+            const updatedPositions = letter.positions.filter(
+              (pos) => pos.des !== category
+            );
+            return { ...letter, positions: updatedPositions };
+          }
+          return letter;
+        });
+  
+        return updatedData.filter((letter) => letter.positions.length > 0);
+      }
+    });
+  };
+  
+  
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
 
@@ -225,31 +289,64 @@ const Agreed_Pre_Demand_Letter_Single = () => {
                           onChange={() => handleCheckboxChange(letter.id)}
                         />
                       </td>
+
                     </tr>
 
                     {/* Conditionally render expanded row with extra inputs if checkbox is selected */}
                     {selectedRows.includes(letter.id) && (
-                      <tr>
-                        <td colSpan="4">
-                          <div className="p-4 bg-gray-100">
-                            {preDemandLetter.positions?.map((position, index) => (
-                              <div key={index} className="flex items-center mb-2">
-                                <span className="mr-2">Category:</span>
-                                <span className="mr-4">{position.category}</span>
-                                <input
-                                  type="number"
-                                  defaultValue={position.qty} // You can set an initial value here
-                                  onChange={(e) =>
-                                    handleQuantityChange(letter.id, position.category, e.target.value)
-                                  }
-                                  className="input input-bordered w-24"
-                                />
-                              </div>
-                            ))}
-                          </div>
-                        </td>
-                      </tr>
-                    )}
+  <tr>
+    <td colSpan="4">
+      <div className="p-4 bg-gray-100">
+        {preDemandLetter.positions?.map((position, index) => (
+          <div key={index} className="flex items-center mb-2">
+            <input
+              type="checkbox"
+              className="mr-2"
+              checked={Array.isArray(quantityData) && quantityData.some(
+                (data) =>
+                  data.id === letter.id &&
+                  data.positions.some((pos) => pos.des === position.category)
+              )}
+              onChange={(e) => {
+                const isChecked = e.target.checked;
+                handleCheckboxForPosition(letter.id, position.category, isChecked);
+              }}
+            />
+            <span className="mr-4">Category: {position.category}</span>
+            <input
+              type="number"
+              disabled={
+                !(Array.isArray(quantityData) && quantityData.some(
+                  (data) =>
+                    data.id === letter.id &&
+                    data.positions.some((pos) => pos.des === position.category)
+                ))
+              }
+              defaultValue={position.qty}
+              onChange={(e) =>
+                handleQuantityChange(letter.id, position.category, e.target.value)
+              }
+              className="input input-bordered w-24"
+            />
+          </div>
+        ))}
+
+        {/* Save Button */}
+        <div className="mt-4">
+          <button
+            className="btn bg-[#071e55] text-white"
+            onClick={() => handleSave(letter.id)} // Call handleSave on click
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </td>
+  </tr>
+)}
+
+
+
                   </React.Fragment>
                 ))}
 
