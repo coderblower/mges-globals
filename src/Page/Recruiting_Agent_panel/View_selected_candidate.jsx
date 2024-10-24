@@ -17,6 +17,8 @@ import checkedImg from "../../../public/images/success_2.svg";
 
 
 
+
+
 const API_URL = import.meta.env.VITE_BASE_URL;
 
 const View_selected_candidate = () => {

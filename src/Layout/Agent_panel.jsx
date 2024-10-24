@@ -21,6 +21,20 @@ const Agent_panel = () => {
       path: "/agent_panel/demand_Letter",
       name: "Demand Letter",
     },
+    {
+      
+      name: "Contract Letter",
+      subItems: [
+        {
+          path: "agent_panel/contract_letter/sent_letter",
+          name: " Sent For Approval ",
+        },
+        {
+          path: "agent_panel/contract_letter/arrived",
+          name: "  Contract Letters ",
+        },
+      ],
+    }, 
 
     {
       path: "/agent_panel/list",

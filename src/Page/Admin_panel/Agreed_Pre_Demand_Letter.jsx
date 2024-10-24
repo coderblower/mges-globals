@@ -6,6 +6,9 @@ import veiw_icon from "../../../public/images/veiw_ison.svg";
 import SearchInput from "../../component/SearchInput";
 import Pagination from "../../component/Pagination";
 import CSVBtn from "../../component/CSVBtn";
+import eyeButton from "../../../public/images/veiw_ison.svg";
+import documentImg from "../../../public/images/document.svg";
+
 
 const Agreed_Pre_Demand_Letter= () => {
   const navigate = useNavigate();
@@ -119,7 +122,6 @@ const Agreed_Pre_Demand_Letter= () => {
               <th>Position</th>
               <th>Terms & Conditions</th>
               <th>  Agent Applied  </th>
-              <th>view</th>
               <th className="text-center py-4 w-[20%]">Action</th>
             </tr>
           </thead>
@@ -152,22 +154,21 @@ const Agreed_Pre_Demand_Letter= () => {
                     }}
                   />
                   <td>{letter.bd_agency_agree.length}</td>
-                  <td className={letter.status === "approved" ? "text-green-600" : "text-yellow-600"}>
-                  <Link
+                 
+                  <td className="text-center ">
+                    <div className="flex justify-center">
+                    <Link
                       to={`/admin/pre_demand_letter/${letter.id}`}
                       className="text-blue-600 hover:underline"
                     >
-                      View
+                      <img src={eyeButton} alt="" />
                     </Link>
-                  </td>
-                  <td className="text-center ">
-                    <div className="flex justify-center">
                     <Link
                       to={`/admin/agreed_pre_demand_letter/${letter.id}`}
                       className="text-blue-600 hover:underline"
                     >
-                      Agent List & <br />
-                      Approve 
+
+                      <img src={documentImg} alt="" /> 
                     </Link>
                     </div>
                   </td>

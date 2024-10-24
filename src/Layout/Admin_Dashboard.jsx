@@ -7,10 +7,13 @@ import { useState } from "react";
 
 const Admin_Dashboard = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // Main menu with a submenu under "Dashboard"
   const listItems = [
     {
       path: "/admin",
       name: "Dashboard",
+    
     },
     {
       path: "/admin/partner",
@@ -32,6 +35,20 @@ const Admin_Dashboard = () => {
       path: "/admin/agreed_pre_demand_letter",
       name: "Agreed Pre Demand ",
     },
+    {
+      
+      name: "Contract Letter",
+      subItems: [
+        {
+          path: "/admin/contract_letter/Agent_request",
+          name: " Agent Request ",
+        },
+        {
+          path: "/admin/contract_letter/Agency_request",
+          name: " Arrived Letter ",
+        },
+      ],
+    }, 
     {
       path: "/admin/demand_letter",
       name: "Demand Letter",
@@ -60,7 +77,7 @@ const Admin_Dashboard = () => {
 
   return (
     <div className="relative lg:flex lg:p-0 p-2">
-      <div className={`w-[300px] fixed top-0 left-0 lg:block hidden `}>
+      <div className={`w-[300px] fixed top-0 left-0 lg:block hidden`}>
         <Navber
           admin="Settings"
           listItems={listItems}
@@ -70,7 +87,7 @@ const Admin_Dashboard = () => {
         />
       </div>
 
-      {/* Mobile menu  */}
+      {/* Mobile menu */}
       <div
         className={`w-[300px] fixed top-0 z-10 ${
           menuOpen ? " left-0" : "-left-[300px]"
@@ -85,16 +102,16 @@ const Admin_Dashboard = () => {
         />
       </div>
 
-      {/* Main contant */}
+      {/* Main content */}
       <div className=" lg:ml-[300px] w-full lg:px-[80px] pb-[50px] overflow-hidden">
         <div className="flex items-center justify-between lg:justify-end lg:mt-10">
-        <NotificationBell />
+          <NotificationBell />
           <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden">
             <img src={menu_icon} alt="" />
           </button>
           <ProfileMenu />
         </div>
-        <Outlet></Outlet>
+        <Outlet />
       </div>
     </div>
   );
