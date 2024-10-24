@@ -75,7 +75,7 @@ const Navber = ({
           </div>
 
           {/* List Item */}
-          <div>
+          <div className="overflow-y-auto max-h-screen"> {/* Added overflow styles */}
             <ul className="text-white navberUl">
               {listItems.map((item, i) => (
                 <li key={i} className="mb-3">
