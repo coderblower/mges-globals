@@ -15,7 +15,7 @@ import closeButton from "../../../public/images/close_icon.svg";
 
 
 
-const Requested_Contract_Letter = () => {
+const Requested_Contract_Letter_Approved = () => {
   const userData = window.localStorage.getItem('user');
   const { id, name } = userData ? JSON.parse(userData) : {}; // Add fallback if localStorage is empty
 
@@ -35,7 +35,7 @@ const Requested_Contract_Letter = () => {
 
     try {
       
-      const res = await get(`api/contract_letter/admin_show`);
+      const res = await get(`api/contract_letter/admin_show_approved`);
 
       console.log(res)
        // Fallback to an empty array
@@ -181,14 +181,6 @@ const Requested_Contract_Letter = () => {
                     </Link>
                   
                      
-                     <button onClick={()=> handletikButton(data.id)}>
-                        <img src={tik} alt="View Contract Letter" style={{ height: '20px', width: '20px', fill: 'green' }} />
-                     </button>
-
-                   
-                      <button onClick={handleCloseButton}>
-                        <img src={closeButton} alt="View Contract Letter" />
-                      </button>
                       
                   
                   </span>
@@ -216,4 +208,4 @@ const Requested_Contract_Letter = () => {
   );
 };
 
-export default Requested_Contract_Letter;
+export default Requested_Contract_Letter_Approved;

@@ -114,6 +114,10 @@ import Contract_Letter from "../Page/Admin_panel/Contract_Letter";
 import Requested_Contract_Letter from "../Page/Admin_panel/Requested_Contract_Letter";
 import Sent_Contract_Letter from "../Page/Recruiting_Agent_panel/Sent_Contract_Letter";
 import Agent_Contract_Letter from "../Page/Recruiting_Agent_panel/Agent_Contract_Letter";
+import Contract_Letter_Candidate_Single from "../Page/Admin_panel/Contract_Letter_Candidate_Single";
+import Requested_Contract_Letter_Approved from "../Page/Admin_panel/Requested_Contract_Letter_Approved";
+import Admin_Requested_Contract_Letter_Approved from "../Page/HiringCountryAgency/Admin_Requested_Contract_Letter_Approved";
+import Agency_Contract_Letter_Candidate_Single from "../Page/HiringCountryAgency/Agency_Contract_Letter_Candidate_Single";
 
 const router = createBrowserRouter([
   {
@@ -205,13 +209,23 @@ const router = createBrowserRouter([
         element: <Create_Demand_Letter />,
       },
       {
-        path: "demand_letters/:id",
+        path: "demand_letter/:id",
         element: <Demand_Letter_View />,
       },
       {
         path: "demand_letter/prepare/:id",
         element: <PrepareDemandSingle />,
-      }
+      },
+      {
+        path: "contract_letter/admin_request",
+        element: <Admin_Requested_Contract_Letter_Approved />,
+
+      },   
+      {
+        path: "contract_letter/single_contract_view/:id",
+        element: <Agency_Contract_Letter_Candidate_Single />,
+
+      }, 
     ],
   },
 
@@ -343,6 +357,16 @@ const router = createBrowserRouter([
       {
         path: "/admin/contract_letter/Agent_request",
         element: <Requested_Contract_Letter />,
+
+      }, 
+      {
+        path: "/admin/contract_letter/Agency_request_approved",
+        element: <Requested_Contract_Letter_Approved  />,
+
+      },   
+      {
+        path: "/admin/contract_letter/single_contract_view/:id",
+        element: <Contract_Letter_Candidate_Single />,
 
       },   
       {

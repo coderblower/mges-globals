@@ -21,6 +21,21 @@ const HiringCountryAgency = () => {
       name: "Demand Letter",
     },
     {
+      
+      name: "Contract Letter",
+      subItems: [
+        {
+          path: "hiring_country_recruting_agency/contract_letter/admin_request",
+          name: " Create Letters ",
+        },
+      
+        {
+          path: "hiring_country_recruting_agency/contract_letter/send_list",
+          name: " Demand Letter List ",
+        },
+      ],
+    }, 
+    {
       path: "/hiring_country_recruting_agency/power_of_attorney",
       name: "Power of Attorney",
     }, 

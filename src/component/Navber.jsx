@@ -54,168 +54,165 @@ const Navber = ({
   };
 
   return (
-    <div className="">
-      {/* Side menu */}
-      <div className="flex min-h-screen">
-        <div className="w-14 bg-[#1E3767]"></div>
+    <div className="flex min-h-screen">
+      <div className="w-14 bg-[#1E3767]"></div>
 
-        <div className={`w-full max-h-screen ${menuOpen ? "bg-[#AEAEBF]" : "bg-[#AEAEBF]"}`}>
-          <div className="flex justify-end">
-            <img
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="pr-5 pt-4 cursor-pointer lg:hidden"
-              src={close_icon}
-              alt=""
-            />
-          </div>
-          <div className="mt-10 px-6 mb-[100px]">
-            <NavLink to={`${navList}`}>
-              <img className="h-[64px] w-[133px]" src={logo_img} alt="" />
-            </NavLink>
-          </div>
+      <div className={`w-full max-h-screen ${menuOpen ? "bg-[#AEAEBF]" : "bg-[#AEAEBF]"}`}>
+        <div className="flex justify-end">
+          <img
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="pr-5 pt-4 cursor-pointer lg:hidden"
+            src={close_icon}
+            alt=""
+          />
+        </div>
+        <div className="mt-10 px-6 mb-2">
+          <NavLink to={`${navList}`}>
+            <img className="h-[64px] w-[133px]" src={logo_img} alt="" />
+          </NavLink>
+        </div>
 
-          {/* List Item */}
-          <div className="overflow-y-auto max-h-screen"> {/* Added overflow styles */}
-            <ul className="text-white navberUl">
-              {listItems.map((item, i) => (
-                <li key={i} className="mb-3">
-                  {item.subItems ? (
-                    <>
-                      {/* Parent with submenu */}
-                      <div
-                        className={`px-6 py-3 text-[#000] font-[600] cursor-pointer flex justify-between items-center ${
-                          activeParent === i ? "bg-[#464646] text-[#fff]" : ""
-                        }`}
-                        onClick={() => toggleSubmenu(i)} // Toggle submenu on click
-                      >
-                        {item.name}
-                        <img
-                          className={`${
-                            activeParent === i ? "rotate-180" : "rotate-0"
-                          } transition-transform duration-300`}
-                          src={down_icon}
-                          alt=""
-                        />
-                      </div>
-
-                      {/* Submenu */}
-                      {activeParent === i && (
-                        <ul className="ml-4">
-                          {item.subItems.map((subItem, index) => (
-                            <li key={index} className="mb-2">
-                              <NavLink
-                                className={`pl-8 py-2 font-[600] ${
-                                  location.pathname === `/${subItem.path}`
-                                    ? "bg-[#464646] text-[#fff]" // Active style for submenu
-                                    : "text-black"
-                                }`}
-                                to={`/${subItem.path}`} // Ensure to prepend '/' for correct routing
-                              >
-                                {subItem.name}
-                              </NavLink>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </>
-                  ) : (
-                    /* Normal item */
-                    <NavLink
-                      className={`px-6 py-3 text-[#000] font-[600] ${
-                        location.pathname === item.path ? "bg-[#464646] text-[#fff]" : ""
+        {/* List Item */}
+        <div className="overflow-y-auto h-[calc(100vh-150px)]"> {/* Set height for scrolling */}
+          <ul className="text-white navberUl">
+            {listItems.map((item, i) => (
+              <li key={i} className="mb-3">
+                {item.subItems ? (
+                  <>
+                    {/* Parent with submenu */}
+                    <div
+                      className={`px-6 py-3 text-[#000] font-[600] cursor-pointer flex justify-between items-center ${
+                        activeParent === i ? "bg-[#464646] text-[#fff]" : ""
                       }`}
-                      to={item.path}
-                      onClick={() => setMenuOpen(false)}
+                      onClick={() => toggleSubmenu(i)} // Toggle submenu on click
                     >
                       {item.name}
-                    </NavLink>
-                  )}
-                </li>
-              ))}
+                      <img
+                        className={`${
+                          activeParent === i ? "rotate-180" : "rotate-0"
+                        } transition-transform duration-300`}
+                        src={down_icon}
+                        alt=""
+                      />
+                    </div>
 
-              {/* Additional report section or other items */}
-              {show_report && (
-                <>
-                  <li
-                    onClick={() => setDrop_2(!drop_2)}
-                    className={`px-6 py-3 text-black font-[600] cursor-pointer flex justify-between items-center`}
+                    {/* Submenu */}
+                    {activeParent === i && (
+                      <ul className="ml-4">
+                        {item.subItems.map((subItem, index) => (
+                          <li key={index} className="mb-2">
+                            <NavLink
+                              className={`pl-8 py-2 font-[600] ${
+                                location.pathname === `/${subItem.path}`
+                                  ? "bg-[#464646] text-[#fff]" // Active style for submenu
+                                  : "text-black"
+                              }`}
+                              to={`/${subItem.path}`} // Ensure to prepend '/' for correct routing
+                            >
+                              {subItem.name}
+                            </NavLink>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </>
+                ) : (
+                  /* Normal item */
+                  <NavLink
+                    className={`px-6 py-3 text-[#000] font-[600] ${
+                      location.pathname === item.path ? "bg-[#464646] text-[#fff]" : ""
+                    }`}
+                    to={item.path}
+                    onClick={() => setMenuOpen(false)}
                   >
-                    <h2>Reports</h2>
-                    <img
-                      className={`${
-                        drop_2
-                          ? "rotate-180 transition-transform duration-500 ease"
-                          : "rotate-0 transition-transform duration-500 ease"
-                      }`}
-                      src={down_icon}
-                      alt=""
-                    />
-                  </li>
-                  {drop_2 && (
-                    <ul className="ml-4">
-                      <li className="mb-2">
-                        <NavLink
-                          className={`pl-8 py-3 font-[600] ${
-                            location.pathname === `/${report_path}/medical-reports`
-                              ? "bg-[#464646] text-[#fff]"
-                              : "text-black"
-                          }`}
-                          to={`/${report_path}/medical-reports`}
-                        >
-                          Medical Reports
-                        </NavLink>
-                      </li>
-                      <li className="mb-2">
-                        <NavLink
-                          className={`pl-8 py-3 font-[600] ${
-                            location.pathname === `/${report_path}/training-reports`
-                              ? "bg-[#464646] text-[#fff]"
-                              : "text-black"
-                          }`}
-                          to={`/${report_path}/training-reports`}
-                        >
-                          Training Reports
-                        </NavLink>
-                      </li>
-                      <li className="mb-2">
-                        <NavLink
-                          className={`pl-8 py-3 font-[600] ${
-                            location.pathname === `/${report_path}/final-reports`
-                              ? "bg-[#464646] text-[#fff]"
-                              : "text-black"
-                          }`}
-                          to={`/${report_path}/final-reports`}
-                        >
-                          Final Reports
-                        </NavLink>
-                      </li>
-                      <li className="mb-2">
-                        <NavLink
-                          className={`pl-8 py-3 font-[600] ${
-                            location.pathname === `/${report_path}/document_Summary`
-                              ? "bg-[#464646] text-[#fff]"
-                              : "text-black"
-                          }`}
-                          to={`/${report_path}/document_Summary`}
-                        >
-                          Document Summary
-                        </NavLink>
-                      </li>
-                    </ul>
-                  )}
-                </>
-              )}
-
-              <li className="mb-[50px]">
-                <button
-                  className="w-full px-6 py-3 text-left text-black font-[600]"
-                  onClick={logout}
-                >
-                  Log Out
-                </button>
+                    {item.name}
+                  </NavLink>
+                )}
               </li>
-            </ul>
-          </div>
+            ))}
+
+            {/* Additional report section or other items */}
+            {show_report && (
+              <>
+                <li
+                  onClick={() => setDrop_2(!drop_2)}
+                  className={`px-6 py-3 text-black font-[600] cursor-pointer flex justify-between items-center`}
+                >
+                  <h2>Reports</h2>
+                  <img
+                    className={`${
+                      drop_2
+                        ? "rotate-180 transition-transform duration-500 ease"
+                        : "rotate-0 transition-transform duration-500 ease"
+                    }`}
+                    src={down_icon}
+                    alt=""
+                  />
+                </li>
+                {drop_2 && (
+                  <ul className="ml-4">
+                    <li className="mb-2">
+                      <NavLink
+                        className={`pl-8 py-3 font-[600] ${
+                          location.pathname === `/${report_path}/medical-reports`
+                            ? "bg-[#464646] text-[#fff]"
+                            : "text-black"
+                        }`}
+                        to={`/${report_path}/medical-reports`}
+                      >
+                        Medical Reports
+                      </NavLink>
+                    </li>
+                    <li className="mb-2">
+                      <NavLink
+                        className={`pl-8 py-3 font-[600] ${
+                          location.pathname === `/${report_path}/training-reports`
+                            ? "bg-[#464646] text-[#fff]"
+                            : "text-black"
+                        }`}
+                        to={`/${report_path}/training-reports`}
+                      >
+                        Training Reports
+                      </NavLink>
+                    </li>
+                    <li className="mb-2">
+                      <NavLink
+                        className={`pl-8 py-3 font-[600] ${
+                          location.pathname === `/${report_path}/final-reports`
+                            ? "bg-[#464646] text-[#fff]"
+                            : "text-black"
+                        }`}
+                        to={`/${report_path}/final-reports`}
+                      >
+                        Final Reports
+                      </NavLink>
+                    </li>
+                    <li className="mb-2">
+                      <NavLink
+                        className={`pl-8 py-3 font-[600] ${
+                          location.pathname === `/${report_path}/document_Summary`
+                            ? "bg-[#464646] text-[#fff]"
+                            : "text-black"
+                        }`}
+                        to={`/${report_path}/document_Summary`}
+                      >
+                        Document Summary
+                      </NavLink>
+                    </li>
+                  </ul>
+                )}
+              </>
+            )}
+
+            <li className="mb-[50px]">
+              <button
+                className="w-full px-6 py-3 text-left text-black font-[600]"
+                onClick={logout}
+              >
+                Log Out
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

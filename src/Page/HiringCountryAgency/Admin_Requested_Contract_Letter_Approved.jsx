@@ -15,7 +15,7 @@ import closeButton from "../../../public/images/close_icon.svg";
 
 
 
-const Requested_Contract_Letter = () => {
+const Admin_Requested_Contract_Letter_Approved = () => {
   const userData = window.localStorage.getItem('user');
   const { id, name } = userData ? JSON.parse(userData) : {}; // Add fallback if localStorage is empty
 
@@ -35,7 +35,7 @@ const Requested_Contract_Letter = () => {
 
     try {
       
-      const res = await get(`api/contract_letter/admin_show`);
+      const res = await get(`api/contract_letter/admin_show_approved`);
 
       console.log(res)
        // Fallback to an empty array
@@ -167,21 +167,20 @@ const Requested_Contract_Letter = () => {
                   <td className="py-4 px-1 text-center w-[30%]">
                   <span className="flex justify-center space-x-3"> {/* Flex container with spacing between items */}
                     <Link
-                      to={`/admin/demand_letter/${data.id}`}
+                      to={`/hiring_country_recruting_agency/demand_letter/${data.id}`}
                       className="text-blue-600 "
                     >
                       <img src={eyeButton} alt="View Demand Letter" />
                     </Link>
                     
                     <Link
-                      to={`/admin/contract_letter/single_contract_view/${data.demand_letter_id}`}
+                      to={`/hiring_country_recruting_agency/contract_letter/single_contract_view/${data.demand_letter_id}`}
                       className=" "
                     >
                       <img src={documentView} alt="View Contract Letter" />
                     </Link>
-                  
                      
-                     <button onClick={()=> handletikButton(data.id)}>
+                    <button onClick={()=> handletikButton(data.id)}>
                         <img src={tik} alt="View Contract Letter" style={{ height: '20px', width: '20px', fill: 'green' }} />
                      </button>
 
@@ -189,6 +188,7 @@ const Requested_Contract_Letter = () => {
                       <button onClick={handleCloseButton}>
                         <img src={closeButton} alt="View Contract Letter" />
                       </button>
+                     
                       
                   
                   </span>
@@ -216,4 +216,4 @@ const Requested_Contract_Letter = () => {
   );
 };
 
-export default Requested_Contract_Letter;
+export default Admin_Requested_Contract_Letter_Approved;
