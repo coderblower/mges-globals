@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { post } from "../../api/axios";
-import TableLoading from "../../component/TableLoading";
+import { post } from "../../../api/axios";
+import TableLoading from "../../../component/TableLoading";
 
 const RequestedCandidate = () => {
   const [loading, setLoading] = useState(false);

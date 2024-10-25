@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { get } from "../../api/axios"; // Adjust the path according to your project structure
+import { get } from "../../../api/axios"; // Adjust the path according to your project structure
 import { useParams, Link, useNavigate } from "react-router-dom";
-import TableLoading from "../../component/TableLoading";
+import TableLoading from "../../../component/TableLoading";
 import jsPDF from "jspdf";
 import "jspdf-autotable"; // For creating tables in the PDF
 

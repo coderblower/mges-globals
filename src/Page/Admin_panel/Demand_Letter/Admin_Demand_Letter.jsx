@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { get, post } from "../../api/axios";
-import TableLoading from "../../component/TableLoading";
+import { get, post } from "../../../api/axios";
+import TableLoading from "../../../component/TableLoading";
 import { useParams, Link } from "react-router-dom";
-import Pagination from "../../component/Pagination";
+import Pagination from "../../../component/Pagination";
 
 const Admin_Demand_Letter = () => {
   const { id } = useParams(); // Get the ID from the URL parameters

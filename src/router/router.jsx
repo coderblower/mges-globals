@@ -3,14 +3,6 @@ import Main from "../Layout/Main";
 import Register from "../Page/Register/Register";
 import Login from "../Page/Login/Login";
 import Account_Details from "../Page/Account_Details/Account_Details";
-import Admin_Dashboard from "../Layout/Admin_Dashboard";
-import AdminDashboard from "../Page/Admin_panel/Dashboard";
-import Partner from "../Page/Admin_panel/Partner";
-import Medical from "../Page/Admin_panel/Medical";
-import Training from "../Page/Admin_panel/Training";
-import Candidates from "../Page/Admin_panel/Candidates";
-import Payment from "../Page/Admin_panel/Payment";
-import Reports from "../Page/Admin_panel/Reports";
 import MedicalReports from "../Page/Medical_Registration/Reports";
 import User_Registration from "../Layout/User_Registration";
 import Registration from "../Page/User_Registration/Registration";
@@ -30,17 +22,65 @@ import Training_Reports from "../Page/Training_Center/Training_Reports";
 import Agent_panel from "../Layout/Agent_panel";
 import Overview from "../Page/Recruiting_Agent_panel/Overview";
 import Users_List from "../Page/Recruiting_Agent_panel/Users_List";
+
+
+
+// admin Panel 
+import Admin_Candidate_Registration from "../Page/Admin_panel/Admin_Candidate_Registration";
+import Admin_Dashboard from "../Layout/Admin_Dashboard";
+import AdminDashboard from "../Page/Admin_panel/Dashboard";
+import Partner from "../Page/Admin_panel/Partner";
+import Medical from "../Page/Admin_panel/Medical";
+import Training from "../Page/Admin_panel/Training";
+import Candidates from "../Page/Admin_panel/Candidates";
+import Payment from "../Page/Admin_panel/Payment";
+import Reports from "../Page/Admin_panel/Reports";
+import Admin_Candidate_List from "../Page/Admin_panel/Admin_Candidate_List";
+import Test_By_Country from "../Page/Admin_panel/Test_By_Country";
+import Training_List from "../Page/Admin_panel/Training_List";
+import Country_List from "../Page/Admin_panel/Country_List";
+import Test_By_Country_List from "../Page/Admin_panel/Test_By_Country_List";
+import Medical_Test from "../Page/Admin_panel/Medical_Test";
 import Agent_panel_Users_List from "../Page/Recruiting_Agent_panel/User_Details";
 import AgentRoute from "../ProtecteRoute/AgentRoute";
+import TrainingReports_admin from "../Page/Admin_panel/TrainingReports";
 import AdminRoute from "../ProtecteRoute/AdminRoute";
 import UserRoute from "../ProtecteRoute/UserRoute";
+import Medical_list from "../Page/Admin_panel/Medical_List";
+import QuotaSet from "../Page/Admin_panel/QuotaSet";
+import FinalReports from "../Page/Admin_panel/FinalReports";
+import Agent_list from "../Page/Admin_panel/Agent_List";
+import SubCandidate from "../Page/Admin_panel/SubCandidate";
+import Designation from "../Page/Admin_panel/Designation";
+import Assign_letter from "../Page/Admin_panel/assign_letter";
+import AgentChecklist from "../Page/Admin_panel/assign_letter";
+import Hiring_Agency_Res from "../Page/Admin_panel/Hiring_Agency Res";
+import Hiring_Agency from "../Page/Admin_panel/Hiring_Agency";
+
+import Contract_Letter_Candidate_Single from "../Page/Admin_panel/Contract_Letter/Contract_Letter_Candidate_Single";
+import RequestedCandidate from "../Page/Admin_panel/Contract_Letter/RequestedCandidate";
+import Contract_Letter from "../Page/Admin_panel/Contract_Letter/Contract_Letter";
+import Requested_Contract_Letter from "../Page/Admin_panel/Contract_Letter/Requested_Contract_Letter";
+import Requested_Contract_Letter_Approved from "../Page/Admin_panel/Contract_Letter/Requested_Contract_Letter_Approved";
+
+import Admin_Demand_letter from "../Page/Admin_panel/Demand_Letter/Admin_Demand_Letter";
+import Admin_Demand_Letter_View from "../Page/Admin_panel/Demand_Letter/Admin_Demand_Letter_View";
+
+import Admin_Pre_Demand_Letter_View from "../Page/Admin_panel/Pre_Demand_Letter/Admin_Pre_Demand_Letter_View";
+import Admin_Pre_Demand_Letter from "../Page/Admin_panel/Pre_Demand_Letter/Admin_Pre_Demand_Letter";
+
+import Agreed_Pre_Demand_Letter_Single from "../Page/Admin_panel/Pre_Demand_Letter/Agreed_Pre_Demand_Letter_Single";
+import Agreed_Pre_Demand_Letter from "../Page/Admin_panel/Pre_Demand_Letter/Agreed_Pre_Demand_Letter";
+
+import MedicalReports_admin from "../Page/Admin_panel/MedicalReports";
+// end admin 
+
+
 import MedicalRoute from "../ProtecteRoute/MedicalRoute";
 import TrainingRoute from "../ProtecteRoute/TrainingRoute";
 import Forgot_Password from "../Page/Login/Forgot_Password";
 import Registration_7 from "../component/Registration/Success";
 import Medical_Candidate_Registration from "../Page/Medical_Registration/Medical_Candidate_Registration";
-import Admin_Candidate_Registration from "../Page/Admin_panel/Admin_Candidate_Registration";
-import Admin_Candidate_List from "../Page/Admin_panel/Admin_Candidate_List";
 import Medical_Candidate_list from "../Page/Medical_Registration/Medical_Candidate_List";
 import Training_Candidates_Registration from "../Page/Training_Center/Training_Candidates_Registration";
 import Training_Candidates_List from "../Page/Training_Center/Training_Candidates_List";
@@ -50,37 +90,22 @@ import Agent_Candidate_List from "../Page/Recruiting_Agent_panel/Agent_Candidate
 import UserDetails from "../Page/User_Panel/UserDetails";
 
 import Profile_Details from "../component/ProfileMenu/Profile_Details";
-import Training_List from "../Page/Admin_panel/Training_List";
-import Country_List from "../Page/Admin_panel/Country_List";
-import Medical_Test from "../Page/Admin_panel/Medical_Test";
-import Test_By_Country from "../Page/Admin_panel/Test_By_Country";
 import Enrolled_List from "../Page/Medical_Registration/Enrolled_List";
-import Test_By_Country_List from "../Page/Admin_panel/Test_By_Country_List";
 import Pre_Skill_Test from "../Page/Training_Center/Pre_Skill_Test";
 import Skill_Test from "../Page/Training_Center/Skill_Test";
 import Crash_Training from "../Page/Training_Center/Crash_Training";
 import Final_Test from "../Page/Training_Center/Final_Test";
 import Reports_Submit from "../Page/Medical_Registration/Reports_Submit";
 import ProfileUpdate from "../component/ProfileMenu/ProfileUpdate";
-import SubCandidate from "../Page/Admin_panel/SubCandidate";
-import Designation from "../Page/Admin_panel/Designation";
 import UpdateCadidate from "../component/UpdateCandidate/UpdateCadidate";
 import QualifiedCandidates from "../Page/Training_Center/QualifiedCandidates";
-import MedicalReports_admin from "../Page/Admin_panel/MedicalReports";
-import TrainingReports_admin from "../Page/Admin_panel/TrainingReports";
-import FinalReports from "../Page/Admin_panel/FinalReports";
-import Admin_Demand_letter from "../Page/Admin_panel/Admin_Demand_Letter";
 
 
 import MedicalReports_agent from "../Page/Recruiting_Agent_panel/MedicalReports";
 import TrainingReports_agent from "../Page/Recruiting_Agent_panel/TrainingReports";
 import FinalReports_agent from "../Page/Recruiting_Agent_panel/FinalReports";
-import Medical_list from "../Page/Admin_panel/Medical_List";
-import Agent_list from "../Page/Admin_panel/Agent_List";
 import Partner_Profile from "../component/ProfileMenu/Partner_Profile";
 import DocumentSummary from "../component/DocumentSummary";
-import QuotaSet from "../Page/Admin_panel/QuotaSet";
-import RequestedCandidate from "../Page/Admin_panel/RequestedCandidate";
 import DocumentView from "../component/ProfileMenu/DocumentView";
 import HiringCountryRoute from "../ProtecteRoute/HiringCountryRoute";
 
@@ -90,34 +115,24 @@ import Hiring_country_panel from "../Layout/HiringCountryAgency";
 import Demand_Letter from "../Page/HiringCountryAgency/Demand_Letter";
 import Pre_Demand_Letter from "../Page/HiringCountryAgency/Pre_Demand_Letter";
 import Create_Demand_Letter from "../Page/HiringCountryAgency/Create_Demand_Letter";
-import Hiring_Agency from "../Page/Admin_panel/Hiring_Agency";
-import Hiring_Agency_Res from "../Page/Admin_panel/Hiring_Agency Res";
 import Create_Pre_Demand_Letter from "../Page/HiringCountryAgency/Create_Pre_Demand_Letter";
 import Pre_Demand_Letter_View from "../Page/HiringCountryAgency/Pre_Demand_Letter_View";
 import DemandLetterView from "../Page/HiringCountryAgency/Demand_Letter_View";
 import Demand_Letter_View from "../Page/HiringCountryAgency/Demand_Letter_View";
-import Admin_Pre_Demand_Letter from "../Page/Admin_panel/Admin_Pre_Demand_Letter";
-import Admin_Pre_Demand_Letter_View from "../Page/Admin_panel/Admin_Pre_Demand_Letter_View";
-import Admin_Demand_Letter_View from "../Page/Admin_panel/Admin_Demand_Letter_View";
 import Agent_Pre_Demand_Letter from "../Page/Recruiting_Agent_panel/Agent_Pre_Demand_Letter";
 import Agent_Pre_Demand_Letter_LetterView from "../Page/Recruiting_Agent_panel/Agent_Pre_Demand_Letter_LetterView";
 import PrepareDemandSingle from "../Page/HiringCountryAgency/PrepareDemandSingle";
 import Agent_Demand_Letter from "../Page/Recruiting_Agent_panel/Demand_Letter";
 import Agent_Demand_Letter_View from "../Page/Recruiting_Agent_panel/Demand_Letter_View";
-import Assign_letter from "../Page/Admin_panel/assign_letter";
-import AgentChecklist from "../Page/Admin_panel/assign_letter";
 import AssignCandidate from "../Page/Recruiting_Agent_panel/AssignCandidate";
 import View_selected_candidate from "../Page/Recruiting_Agent_panel/View_selected_candidate";
-import Agreed_Pre_Demand_Letter from "../Page/Admin_panel/Agreed_Pre_Demand_Letter";
-import Agreed_Pre_Demand_Letter_Single from "../Page/Admin_panel/Agreed_Pre_Demand_Letter_Single";
-import Contract_Letter from "../Page/Admin_panel/Contract_Letter";
-import Requested_Contract_Letter from "../Page/Admin_panel/Requested_Contract_Letter";
 import Sent_Contract_Letter from "../Page/Recruiting_Agent_panel/Sent_Contract_Letter";
 import Agent_Contract_Letter from "../Page/Recruiting_Agent_panel/Agent_Contract_Letter";
-import Contract_Letter_Candidate_Single from "../Page/Admin_panel/Contract_Letter_Candidate_Single";
-import Requested_Contract_Letter_Approved from "../Page/Admin_panel/Requested_Contract_Letter_Approved";
 import Admin_Requested_Contract_Letter_Approved from "../Page/HiringCountryAgency/Admin_Requested_Contract_Letter_Approved";
 import Agency_Contract_Letter_Candidate_Single from "../Page/HiringCountryAgency/Agency_Contract_Letter_Candidate_Single";
+import Contract_Letter_Form_Create from "../Page/HiringCountryAgency/Contract_Letter_Form_Create";
+import Contract_Letter_Form_Create_Edit from "../Page/HiringCountryAgency/Contract_Letter_Form_Create_Edit";
+import Contract_Letter_Single_View from "../Page/HiringCountryAgency/Contract_Letter_Single_View";
 
 const router = createBrowserRouter([
   {
@@ -225,7 +240,24 @@ const router = createBrowserRouter([
         path: "contract_letter/single_contract_view/:id",
         element: <Agency_Contract_Letter_Candidate_Single />,
 
-      }, 
+      },
+      {
+        path: "contract_letter/contract_form/:id",
+        element: <Contract_Letter_Form_Create />,
+
+      },
+      {
+        path: "contract_letter/contract_form_edit/:id",
+        element: <Contract_Letter_Form_Create_Edit />,
+
+      },
+      {
+        path: "contract_letter/contract_letter_view/:id",
+        element: <Contract_Letter_Single_View />,
+
+      },
+
+
     ],
   },
 

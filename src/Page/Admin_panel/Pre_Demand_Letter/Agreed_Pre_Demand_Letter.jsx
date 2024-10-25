@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { post, get } from "../../api/axios";
+import { post, get } from "../../../api/axios";
 import { Link, useNavigate } from "react-router-dom";
-import TableLoading from "../../component/TableLoading";
-import veiw_icon from "../../../public/images/veiw_ison.svg";
-import SearchInput from "../../component/SearchInput";
-import Pagination from "../../component/Pagination";
-import CSVBtn from "../../component/CSVBtn";
-import eyeButton from "../../../public/images/veiw_ison.svg";
-import documentImg from "../../../public/images/document.svg";
+import TableLoading from "../../../component/TableLoading";
+import veiw_icon from "../../../../public/images/veiw_ison.svg";
+import SearchInput from "../../../component/SearchInput";
+import Pagination from "../../../component/Pagination";
+import CSVBtn from "../../../component/CSVBtn";
+import eyeButton from "../../../../public/images/veiw_ison.svg";
+import documentImg from "../../../../public/images/document.svg";
 
 
 const Agreed_Pre_Demand_Letter= () => {

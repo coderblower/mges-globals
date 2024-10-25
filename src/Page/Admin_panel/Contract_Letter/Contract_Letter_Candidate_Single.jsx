@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import { post, get } from "../../api/axios";
-import user_img from "../../../public/images/Avater.png";
-import notQR_img from "../../../public/images/notQR.jpeg";
-import delete_icon from "../../../public/images/delete_icon.svg";
-import edit_icon from "../../assets/update.svg";
-import veiw_icon from "../../../public/images/veiw_ison.svg";
+import { post, get } from "../../../api/axios";
+import user_img from "../../../../public/images/Avater.png";
+import notQR_img from "../../../../public/images/notQR.jpeg";
+import delete_icon from "../../../../public/images/delete_icon.svg";
+import edit_icon from "../../../assets/update.svg";
+import veiw_icon from "../../../../public/images/veiw_ison.svg";
 import {useParams, Link, NavLink } from "react-router-dom";
-import Pagination from "../../component/Pagination";
-import SearchInput from "../../component/SearchInput";
-import TableLoading from "../../component/TableLoading";
-import CSVBtn from "../../component/CSVBtn";
-import success_icon from "../../../public/images/success.svg";
-import documentUploadet from "../../../public/images/document.svg";
-import documentNotUploadet from "../../../public/images/documentNot.svg";
-import checkedImg from "../../../public/images/success_2.svg";
+import Pagination from "../../../component/Pagination";
+import SearchInput from "../../../component/SearchInput";
+import TableLoading from "../../../component/TableLoading";
+import CSVBtn from "../../../component/CSVBtn";
+import success_icon from "../../../../public/images/success.svg";
+import documentUploadet from "../../../../public/images/document.svg";
+import documentNotUploadet from "../../../../public/images/documentNot.svg";
+import checkedImg from "../../../../public/images/success_2.svg";
 
 
 

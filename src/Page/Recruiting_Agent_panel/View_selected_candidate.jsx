@@ -55,8 +55,10 @@ const View_selected_candidate = () => {
          // Any filter you are applying
         
       });
+
       
-      setSendSuccess(response);
+      
+      setSendSuccess(response.exists);
 
     } catch (error) {
       console.error("Error sending data:", error);

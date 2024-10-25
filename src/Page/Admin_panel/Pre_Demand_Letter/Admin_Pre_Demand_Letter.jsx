@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { post, get } from "../../api/axios";
+import { post, get } from "../../../api/axios";
 import { Link, useNavigate } from "react-router-dom";
-import TableLoading from "../../component/TableLoading";
-import veiw_icon from "../../../public/images/veiw_ison.svg";
-import SearchInput from "../../component/SearchInput";
-import Pagination from "../../component/Pagination";
-import CSVBtn from "../../component/CSVBtn";
+import TableLoading from "../../../component/TableLoading";
+import veiw_icon from "../../../../public/images/veiw_ison.svg";
+import SearchInput from "../../../component/SearchInput";
+import Pagination from "../../../component/Pagination";
+import CSVBtn from "../../../component/CSVBtn";
 
 const Admin_Pre_Demand_Letter = () => {
   const navigate = useNavigate();

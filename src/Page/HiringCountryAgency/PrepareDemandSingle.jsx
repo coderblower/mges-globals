@@ -160,7 +160,7 @@ const PrepareDemandSingle = () => {
                   <td className="py-4 px-3">{user.name || "N/A"}</td>
                   <td className="py-4 px-3">
                     <Link
-                      to={`/hiring_country_recruting_agency/demand_letters/${user.id}`}
+                      to={`/hiring_country_recruting_agency/demand_letter/${user.id}`}
                       className="text-blue-600 hover:underline"
                     >
                       <img src={documentUploadet} alt="" /> 

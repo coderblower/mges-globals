@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { get, post } from "../../api/axios";
-import TableLoading from "../../component/TableLoading";
+import { get, post } from "../../../api/axios";
+import TableLoading from "../../../component/TableLoading";
 import { useParams, Link } from "react-router-dom";
-import Pagination from "../../component/Pagination";
+import Pagination from "../../../component/Pagination";
 
 const Contract_Letter = () => {
   const userData = window.localStorage.getItem('user');

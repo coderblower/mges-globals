@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { get } from "../../api/axios"; // Assuming you have a get method for fetching data
-import TableLoading from "../../component/TableLoading";
-import download_img from "../../../public/images/document.svg"; // Import any necessary assets
+import { get } from "../../../api/axios"; // Assuming you have a get method for fetching data
+import TableLoading from "../../../component/TableLoading";
+import download_img from "../../../../public/images/document.svg";
+
+// Import any necessary assets
 import jsPDF from "jspdf"; // Import jsPDF for PDF generation
 import "jspdf-autotable"; // Import jsPDF-Autotable for table support
 

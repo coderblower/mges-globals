@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { post, get } from "../../api/axios";
+import { post, get } from "../../../api/axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import TableLoading from "../../component/TableLoading";
-import SearchInput from "../../component/SearchInput";
-import Pagination from "../../component/Pagination";
-import CSVBtn from "../../component/CSVBtn";
+import TableLoading from "../../../component/TableLoading";
+import SearchInput from "../../../component/SearchInput";
+import Pagination from "../../../component/Pagination";
+import CSVBtn from "../../../component/CSVBtn";
 
 const Agreed_Pre_Demand_Letter_Single = () => {
   const { id } = useParams(); // Get the id from the URL
