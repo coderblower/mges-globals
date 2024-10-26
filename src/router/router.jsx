@@ -133,6 +133,14 @@ import Agency_Contract_Letter_Candidate_Single from "../Page/HiringCountryAgency
 import Contract_Letter_Form_Create from "../Page/HiringCountryAgency/Contract_Letter_Form_Create";
 import Contract_Letter_Form_Create_Edit from "../Page/HiringCountryAgency/Contract_Letter_Form_Create_Edit";
 import Contract_Letter_Single_View from "../Page/HiringCountryAgency/Contract_Letter_Single_View";
+import Agency_Approved_Contract_Letter_List from "../Page/HiringCountryAgency/Agency_Approved_Contract_Letter_List";
+import Agency_Contract_Letter_Candidate_Single_With_Form from "../Page/HiringCountryAgency/Agency_Contract_Letter_Candidate_Single_With_Form";
+import Agency_Rejected_Contract_List from "../Page/HiringCountryAgency/Agency_Rejected_Contract_list";
+import Admin_Contract_Letter_Candidate_Single_With_Form from "../Page/Admin_panel/Contract_Letter/Admin_Contract_Letter_Candidate_Single_With_Form";
+import Admin_Contract_Letter_Single_View from "../Page/Admin_panel/Contract_Letter/Admin_Contract_Letter_Single_View";
+import Contract_Letter_Varified from "../Page/Admin_panel/Contract_Letter/Contract_Letter_Varified";
+import User_Contract_Letter from "../Page/User_Panel/User_Contract_Letter";
+import User_Contract_Letter_Single_View from "../Page/User_Panel/User_Contract_Letter_Single_View";
 
 const router = createBrowserRouter([
   {
@@ -236,9 +244,21 @@ const router = createBrowserRouter([
         element: <Admin_Requested_Contract_Letter_Approved />,
 
       },   
+
+      {
+        path: "contract_letter/agency_approved",
+        element: <Agency_Approved_Contract_Letter_List />,
+
+      },
+
       {
         path: "contract_letter/single_contract_view/:id",
         element: <Agency_Contract_Letter_Candidate_Single />,
+
+      },
+      {
+        path: "contract_letter/single_contract_view_with_forms/:id",
+        element: <Agency_Contract_Letter_Candidate_Single_With_Form />,
 
       },
       {
@@ -256,7 +276,11 @@ const router = createBrowserRouter([
         element: <Contract_Letter_Single_View />,
 
       },
+      {
+        path: "contract_letter/agency_rejected",
+        element: <Agency_Rejected_Contract_List />,
 
+      },
 
     ],
   },
@@ -291,6 +315,14 @@ const router = createBrowserRouter([
       {
         path: "update_porfile",
         element: <ProfileUpdate />,
+      },
+      {
+        path: "contract_letter",
+        element: <User_Contract_Letter />,
+      },
+      {
+        path: "contract_letter/:id",
+        element: <User_Contract_Letter_Single_View />,
       },
     ],
   },
@@ -387,6 +419,11 @@ const router = createBrowserRouter([
 
       },
       {
+        path: "/admin/contract_letter/Agency_request_varified",
+        element: <Contract_Letter_Varified />,
+
+      },
+      {
         path: "/admin/contract_letter/Agent_request",
         element: <Requested_Contract_Letter />,
 
@@ -401,6 +438,18 @@ const router = createBrowserRouter([
         element: <Contract_Letter_Candidate_Single />,
 
       },   
+
+      {
+        path: "contract_letter/single_contract_view_with_forms/:id",
+        element: <Admin_Contract_Letter_Candidate_Single_With_Form />,
+
+      },
+      {
+        path: "contract_letter/contract_letter_view/:id",
+        element: <Admin_Contract_Letter_Single_View />,
+
+      },
+
       {
         path: "partner_profile/:id",
         element: <Demand_Letter />,

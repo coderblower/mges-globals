@@ -8,7 +8,7 @@ import autoTable from 'jspdf-autotable';
 import html2canvas from 'html2canvas';
 import domtoimage from "dom-to-image";
 
-const Contract_Letter_Single_View = () => {
+const User_Contract_Letter_Single_View = () => {
   const { id } = useParams(); // Get the ID from the URL parameters
   const [demandLetter, setDemandLetter] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -159,4 +159,4 @@ conditions stated below. The parties will hereinafter be referred to as "employe
   );
 };
 
-export default Contract_Letter_Single_View;
+export default User_Contract_Letter_Single_View;

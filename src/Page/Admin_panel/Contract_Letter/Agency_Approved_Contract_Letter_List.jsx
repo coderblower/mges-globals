@@ -7,7 +7,7 @@ import Pagination from "../../component/Pagination";
 
 
 import eyeButton from "../../../public/images/veiw_ison.svg";
-import tik from "../../../public/images/success_2.svg";
+import edit from "../../../public/images/edit_icon.svg";
 import documentView from "../../../public/images/document.svg";
 import closeButton from "../../../public/images/close_icon.svg";
 
@@ -15,7 +15,7 @@ import closeButton from "../../../public/images/close_icon.svg";
 
 
 
-const Admin_Requested_Contract_Letter_Approved = () => {
+const Agency_Approved_Contract_Letter_List = () => {
   const userData = window.localStorage.getItem('user');
   const { id, name } = userData ? JSON.parse(userData) : {}; // Add fallback if localStorage is empty
 
@@ -35,7 +35,7 @@ const Admin_Requested_Contract_Letter_Approved = () => {
 
     try {
       
-      const res = await get(`api/contract_letter/agency_show_approved_by_admin`);
+      const res = await get(`api/contract_letter/agency_show_approved`);
 
       console.log(res)
        // Fallback to an empty array
@@ -84,12 +84,11 @@ const Admin_Requested_Contract_Letter_Approved = () => {
     }
   };
 
-  const handleCloseButton = async (id) => {
+  const handleCloseButton = async () => {
     try {
 
-      
-      const res = await post(`api/contract_letter/agency_reject/${id}`);
-      fetchContractLetters(); 
+      console.log('button clicked ')
+      const res = await post(`api/pre_demand_letter/alreadysdfs`);
 
       // Update button statuses
       res.forEach(data => {
@@ -167,15 +166,10 @@ const Admin_Requested_Contract_Letter_Approved = () => {
                 
                   <td className="py-4 px-1 text-center w-[30%]">
                   <span className="flex justify-center space-x-3"> {/* Flex container with spacing between items */}
-                    <Link
-                      to={`/hiring_country_recruting_agency/demand_letter/${data.id}`}
-                      className="text-blue-600 "
-                    >
-                      <img src={eyeButton} alt="View Demand Letter" />
-                    </Link>
+                   
                     
                     <Link
-                      to={`/hiring_country_recruting_agency/contract_letter/single_contract_view/${data.demand_letter_id}`}
+                      to={`/hiring_country_recruting_agency/contract_letter/single_contract_view_with_forms/${data.demand_letter_id}`}
                       className=" "
                     >
                       <img src={documentView} alt="View Contract Letter" />
@@ -183,19 +177,16 @@ const Admin_Requested_Contract_Letter_Approved = () => {
                      
                     <button >
                     <Link
-                      to={`/hiring_country_recruting_agency/contract_letter/contract_form/${data.id}`}
+                      to={`/hiring_country_recruting_agency/contract_letter/contract_form_edit/${data.id}`}
                       className=" "
                     >
-                      <img src={tik} alt="View Contract Letter" style={{ height: '20px', width: '20px', fill: 'green' }} />
+                      <img src={edit} alt="View Contract Letter" style={{ height: '20px', width: '20px', fill: 'green' }} />
                     </Link>
                       
                         
                      </button>
 
                    
-                      <button onClick={()=>handleCloseButton(data.id)}>
-                        <img src={closeButton} alt="View Contract Letter" />
-                      </button>
                      
                       
                   
@@ -211,7 +202,7 @@ const Admin_Requested_Contract_Letter_Approved = () => {
         )}
 
         {!loading && !error && contractLetters.length === 0 && (
-          <p className="text-center">No Contract Letters Issuing Order found .</p>
+          <p className="text-center">No demand letters found.</p>
         )}
       </div>
 
@@ -224,4 +215,4 @@ const Admin_Requested_Contract_Letter_Approved = () => {
   );
 };
 
-export default Admin_Requested_Contract_Letter_Approved;
+export default Agency_Approved_Contract_Letter_List;

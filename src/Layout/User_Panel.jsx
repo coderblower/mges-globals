@@ -23,6 +23,10 @@ const User_Panel = () => {
       path: "/user_panel/user_training_report",
       name: "Training Report",
     },
+    {
+      path: "/user_panel/contract_letter",
+      name: "Contract Letter",
+    },
   ];
 
   return (

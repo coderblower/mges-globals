@@ -1,14 +1,14 @@
 import { useEffect, useState, useRef } from "react";
-import { get } from "../../api/axios"; // Adjust the path according to your project structure
+import { get } from "../../../api/axios"; // Adjust the path according to your project structure
 import { useParams, Link, useNavigate } from "react-router-dom";
-import TableLoading from "../../component/TableLoading";
+import TableLoading from "../../../component/TableLoading";
 import jsPDF from "jspdf";
 import "jspdf-autotable"; // For creating tables in the PDF
 import autoTable from 'jspdf-autotable';
 import html2canvas from 'html2canvas';
 import domtoimage from "dom-to-image";
 
-const Contract_Letter_Single_View = () => {
+const Admin_Contract_Letter_Single_View = () => {
   const { id } = useParams(); // Get the ID from the URL parameters
   const [demandLetter, setDemandLetter] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -159,4 +159,4 @@ conditions stated below. The parties will hereinafter be referred to as "employe
   );
 };
 
-export default Contract_Letter_Single_View;
+export default Admin_Contract_Letter_Single_View;

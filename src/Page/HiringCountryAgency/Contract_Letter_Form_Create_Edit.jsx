@@ -70,7 +70,8 @@ const Contract_Letter_Form_Create_Edit = () => {
       if (contractLetterId) {
         // Update existing record
         res = await put(`/api/contract_letter_form/${contractLetterId}`, payload);
-        console.log(res);
+        // navigate('/hiring_country_recruting_agency/contract_letter/agency_approved');
+
       } else {
         // Create new record
         res = await post("/api/contract_letter_form", payload);
@@ -79,7 +80,7 @@ const Contract_Letter_Form_Create_Edit = () => {
       if (res) {
         setMessage("Contract letter saved successfully!");
         setError("");
-        navigate("/hiring_country_recruting_agency/contract_letter/admin_request");
+        navigate("/hiring_country_recruting_agency/contract_letter/agency_approved");
       } else {
         setError("Failed to save Contract letter. Please try again.");
         setMessage("");

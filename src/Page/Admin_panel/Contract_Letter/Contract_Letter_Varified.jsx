@@ -10,7 +10,7 @@ import documentView from "../../../../public/images/document.svg";
 import closeButton from "../../../../public/images/close_icon.svg";
 import tik from "../../../../public/images/success_2.svg";
 
-const Contract_Letter = () => {
+const Contract_Letter_Varified = () => {
   const userData = window.localStorage.getItem('user');
   const { id, name } = userData ? JSON.parse(userData) : {};
   const location = useLocation();
@@ -27,7 +27,7 @@ const Contract_Letter = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await get(`api/contract_letter/admin_show_agency_approved_contract_letter`);
+      const res = await get(`api/contract_letter/admin_show_agency_approved_contract_letter_varified`);
       setContractLetters(res);
       setPagination({
         per_page: res.per_page || 10,
@@ -78,11 +78,11 @@ const Contract_Letter = () => {
     className={`px-4 py-2 font-semibold rounded-r-md transform ${
       location.pathname === '/admin/contract_letter/Agency_request'
 
-        ? 'bg-[rgb(30,55,103)]  text-white  cursor-pointer'
+        ? 'bg-[rgb(30,55,103)] text-white  cursor-pointer'
         : 'bg-gray-300 text-gray-700 cursor-default'
     }`}
     style={{
-      position: 'relative',
+      
       
     }}
   >
@@ -134,9 +134,7 @@ const Contract_Letter = () => {
                       >
                         <img src={documentView} alt="View Contract Letter" />
                       </Link>
-                      <button onClick={() => tikHandler(data.id)}>
-                        <img src={tik} alt="Approve Contract" style={{ height: '20px', width: '20px' }} />
-                      </button>
+                    
                     </span>
                   </td>
                 </tr>
@@ -159,4 +157,4 @@ const Contract_Letter = () => {
   );
 };
 
-export default Contract_Letter;
+export default Contract_Letter_Varified;

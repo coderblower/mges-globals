@@ -30,8 +30,12 @@ const HiringCountryAgency = () => {
         },
       
         {
-          path: "hiring_country_recruting_agency/contract_letter/send_list",
-          name: " Demand Letter List ",
+          path: "hiring_country_recruting_agency/contract_letter/agency_approved",
+          name: " Contract Letter List ",
+        },
+        {
+          path: "hiring_country_recruting_agency/contract_letter/agency_rejected",
+          name: "Rejected Contract Letter ",
         },
       ],
     }, 
