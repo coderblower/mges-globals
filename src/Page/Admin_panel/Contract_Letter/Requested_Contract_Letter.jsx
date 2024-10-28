@@ -129,6 +129,30 @@ const Requested_Contract_Letter = () => {
 
   return (
     <div className="lg:mt-10 mt-2">
+      <div className="absolute top-4 left-4 flex">
+  {/* <Link
+    to="/admin/contract_letter/Agency_request"
+    className={`px-4 py-2 font-semibold rounded-l-md transform ${
+      location.pathname === '/admin/contract_letter/Agency_request'
+        ? 'bg-[rgb(30,55,103)] text-white cursor-pointer'
+        : 'bg-gray-300 text-gray-700 cursor-default'
+    }`}
+  >
+    Verifying
+  </Link>
+
+  <Link
+    to="/admin/contract_letter/Agency_request_varified"
+    className={`px-4 py-2 font-semibold rounded-r-md transform ${
+      location.pathname === '/admin/contract_letter/Agency_request_varified'
+        ? 'bg-[rgb(30,55,103)] text-white cursor-pointer'
+        : 'bg-gray-300 text-gray-700 cursor-default'
+    }`}
+  >
+    <span className="absolute -left-0.5 top-0 h-full w-1 transform bg-white"></span>
+    Verified
+  </Link> */}
+</div>
       <div className="flex items-center justify-center mt-[24px]">
         <h2 className="text-[24px] text-[#4D4D4D] text-center mb-5 font-bold"> Checking Agent Contract Letters </h2>
       </div>

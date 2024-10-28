@@ -38,6 +38,10 @@ const Admin_Dashboard = () => {
       name: "Agreed Pre Demand ",
     },
     {
+      path: "/admin/demand_letter",
+      name: "Demand Letter",
+    },
+    {
       
       name: "Contract Letter",
       subItems: [
@@ -49,17 +53,14 @@ const Admin_Dashboard = () => {
           path: "admin/contract_letter/Agency_request",
           name: " Arrived Letter ",
         },
-        {
-          path: "admin/contract_letter/Agency_request_approved",
-          name: " Approved List ",
-        },
+        // {
+        //   path: "admin/contract_letter/Agency_request_approved",
+        //   name: " Approved List ",
+        // },
       ],
     }, 
   
-    {
-      path: "/admin/demand_letter",
-      name: "Demand Letter",
-    },
+   
     {
       path: "/admin/training_list",
       name: "Training center list",

@@ -203,6 +203,7 @@ const Agreed_Pre_Demand_Letter_Single = () => {
     try {
       const res = await post(`/api/pre_demand_letter/admin_approve_agent_agreed_pre_demand/${id}`, payload);
       console.log(res); // Log payload
+      navigate('/admin/agreed_pre_demand_letter')
     } catch (error) {
       console.error("Error submitting the data:", error);
     }

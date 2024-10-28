@@ -18,7 +18,8 @@ const HiringCountryAgency = () => {
     },
     {
       path: "/hiring_country_recruting_agency/demand_letter",
-      name: "Demand Letter",
+      name: "Create Demand Letter",
+
     },
     {
       

@@ -125,11 +125,6 @@ const User_Contract_Letter = () => {
       {/* Filter and search section */}
       <div className="lg:flex justify-between items-center">
           <div className="flex gap-4 mt-[20px] lg:mt-0">
-    
-
-
-
-
           {csvData?.length > 0 && (
             <CSVBtn data={csvData} filename={"Candidates_List"} />
           )}

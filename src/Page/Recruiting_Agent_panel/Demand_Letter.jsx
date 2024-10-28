@@ -105,9 +105,10 @@ const Agent_Demand_Letter = () => {
                 <th className="py-4 px-3 font-semibold">Description</th>
                 <th className="py-4 px-3 font-semibold">Postions </th>
                 <th className="py-4 px-3 font-semibold">View </th>
-                <th className="py-4 px-3 font-semibold">Candidates </th> 
+                 
 
                 <th className="py-4 px-3 font-semibold text-center">Actions</th>
+                
               </tr>
             </thead>
             <tbody>
@@ -130,23 +131,25 @@ const Agent_Demand_Letter = () => {
                       View
                     </Link>
                   </td>
-                  <td className="py-4 px-3"> <Link
-                      to={`/agent_panel/demand_letter/selected_candidate/${data.id}`} // Fix extra closing parenthesis
-                      className=" hover:underline"
-                    > selected Candidate </Link></td> 
                   <td className="py-4 px-1 text-center w-[30%]">
-                  <Link
+                <span className="mr-2 mb-3">  <Link
                       to={`/agent_panel/demand_letter/assign_candidate/${data.id}`} // Fix extra closing parenthesis
-                      className="bg-[#1F2937] hover:underline"
+                      className=""
                     >
                         <button
                         
-                        className="py-2 px-4 bg-[#1F2937] text-white rounded-md" >
+                        className=" mb-2 bg-[#1a054d] text-[#fff] px-2 py-2 mb-5" >
                          Assign Candidate 
                       </button>
-                    </Link>
-                    
+                    </Link> </span>
+                  <span>  <Link
+                      to={`/agent_panel/demand_letter/selected_candidate/${data.id}`} // Fix extra closing parenthesis
+                      className=" hover:underline  mb-2 bg-[#1a054d] text-[#fff] px-2 py-2 mb-2"
+                    > <button>apply for Contract </button></Link>
+                    </span>
                   </td>
+                 
+             
                 </tr>
               ))}
             </tbody>

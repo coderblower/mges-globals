@@ -154,7 +154,7 @@ const Admin_Pre_Demand_Letter = () => {
                   <td>{letter.updated_at.slice(0, 10)}</td>
                   <td className={letter.status === "approved" ? "text-green-600" : "text-yellow-600"}>
                   <Link
-                      to={`/admin/demand_letter/${letter.id}`}
+                      to={`/admin/pre_demand_letter/${letter.id}`}
                       className="text-blue-600 hover:underline"
                     >
                       View
